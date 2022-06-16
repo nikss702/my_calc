@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="css/style.css">
+    <style>
+        .container
+        {
+            display:flex;
+            flex-wrap:nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+.calc
+{
+    height:370px ;
+    width:230px;
+    border:2px solid black;
+}
+
+.input
+{
+    height:40px;
+    width:210px;
+    margin-left:5px;
+    margin-top:0px;
+    text-align: right;
+    font-size:30px;
+    border-top: none;
+}
+.input:focus
+{
+    outline: none;
+}
+.subinput:focus
+{
+    outline: none;
+}
+.subinput{
+    
+    height:20px;
+    width:210px;
+    margin-left:5px;
+    margin-top:5px;
+    text-align: right;
+    font-size:18px;
+    border-bottom: none;
+
+}
+.btn-clear
+{
+    color:white;
+    background-color: brown;
+    margin-left:190px ;
+}
+.btn{
+    height:40px;
+    width:40px;
+    margin-left:10px;
+    text-align:center;
+}
+.btn-num{
+    color:white;
+    background-color:grey;
+}
+.btn-op
+{
+    color:white;
+    background-color: black;
+   
+}
+.btn-info
+{
+    color:white;
+    background-color:blueviolet;
+   
+}
+.history
+{
+    background-color: black;
+    height:370px ;
+    width:230px;
+    color:azure;
+    margin-left: 300;
+}
+.output
+{
+    width:200px;
+    margin-left: 10px;
+    border:2px solid white;
+    text-align: right;
+    font-size:18px;
+
+}
+
+.his{
+    border: 2px solid white;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class ="calc">
+            <input type="text" class="subinput" id="equation" readonly><br>
+            <input type="text" class="input" id="input" value="0"><br><br>
+            <input type="button" value="C" onclick="clearInput()" class="btn btn-clear">
+            <input type="button" value="H"  onclick="clearHistory()" class="btn btn-info"><br><br>
+            <input type="button" value="7" onclick="getVal('7')" class="btn btn-num">
+            <input type="button" value="8" onclick="getVal('8')" class="btn btn-num">
+            <input type="button" value="9" onclick="getVal('9')" class="btn btn-num">
+            <input type="button" value="+" onclick="getVal('+')" class="btn btn-op"><br><br>
+            <input type="button" value="4" onclick="getVal('4')" class="btn btn-num">
+            <input type="button" value="5" onclick="getVal('5')" class="btn btn-num">
+            <input type="button" value="6" onclick="getVal('6')" class="btn btn-num">
+            <input type="button" value="-" onclick="getVal('-')" class="btn btn-op"><br><br>
+            <input type="button" value="1" onclick="getVal('1')" class="btn btn-num">
+            <input type="button" value="2" onclick="getVal('2')" class="btn btn-num">
+            <input type="button" value="3" onclick="getVal('3')" class="btn btn-num">
+            <input type="button" value="*" onclick="getVal('*')" class="btn btn-op"><br><br>
+            <input type="button" value="0" onclick="getVal('0')" class="btn btn-num">
+            <input type="button" value="." onclick="getVal('.')" class="btn btn-num">
+            <input type="button" value="=" onclick="ans()" class="btn btn-num">
+            <input type="button" value="/" onclick="getVal('/')" class="btn btn-op"><br><br>
+        </div>
+        <div  class="history">
+            <h3>History</h3>
+            <div id="history">
+
+            </div>
+        </div>
+        <script>
+            var equation;
+            var answers=[],eq=[];
+            var inputVal=document.querySelector("#input");
+            var questionInput=document.querySelector("#equation");
+            var historyDiv=document.querySelector("#history");
+            function getVal(val)
+            {
+                if(inputVal.value=="0")
+                {
+                    inputVal.value=val;
+                }
+                else
+                {
+                    inputVal.value+=val;
+                }
+                
+            }
+            function clearInput()
+            {
+                inputVal.value="0";
+                questionInput.value="";
+            }
+            function ans()
+            {
+                equation=inputVal.value+ " = ";
+                inputVal.value=eval(inputVal.value);
+                questionInput.value=equation;
+                answers.push(eval(inputVal.value));
+                eq.push(equation);
+                console.log(answers);
+                console.log(eq);
+                showHistory();
+                
+            }
+
+            function showHistory()
+            {
+                
+                var history="<div>";
+                for(let i=0;i<eq.length;i++)
+                {
+                    history+="<div class='his'><p>"+eq[i]+"</p><p>"+answers[i]+"</p></div>";
+                }
+                history+="</div>";
+                historyDiv.innerHTML=history;
+            }
+
+            function clearHistory()
+            {
+                const res=confirm(" Are You Sure want to delete history ? ");
+                if(res)
+                {
+                    historyDiv.innerHTML="";
+                    eq=[];
+                    answers=[];
+                }
+               
+
+            }
+        </script>
+    </div>
+
+
+    <!-- <script src="js/index.js"></script> -->
+</body>
+</html>

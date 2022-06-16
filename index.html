@@ -107,7 +107,8 @@
             <input type="text" class="subinput" id="equation" readonly><br>
             <input type="text" class="input" id="input" value="0"><br><br>
             <input type="button" value="C" onclick="clearInput()" class="btn btn-clear">
-            <input type="button" value="H"  onclick="clearHistory()" class="btn btn-info"><br><br>
+            <input type="button" value="H"  onclick="clearHistory()" class="btn btn-info">
+            <input type="button" value="D"  onclick="" class="btn btn-info"><br><br>
             <input type="button" value="7" onclick="getVal('7')" class="btn btn-num">
             <input type="button" value="8" onclick="getVal('8')" class="btn btn-num">
             <input type="button" value="9" onclick="getVal('9')" class="btn btn-num">
@@ -140,13 +141,9 @@
             function getVal(val)
             {
                 if(inputVal.value=="0")
-                {
                     inputVal.value=val;
-                }
                 else
-                {
                     inputVal.value+=val;
-                }
                 
             }
             function clearInput()
@@ -161,8 +158,6 @@
                 questionInput.value=equation;
                 answers.push(eval(inputVal.value));
                 eq.push(equation);
-                console.log(answers);
-                console.log(eq);
                 showHistory();
                 
             }

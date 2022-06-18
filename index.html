@@ -108,7 +108,7 @@
             <input type="text" class="input" id="input" value="0"><br><br>
             <input type="button" value="C" onclick="clearInput()" class="btn btn-clear">
             <input type="button" value="H"  onclick="clearHistory()" class="btn btn-info">
-            <input type="button" value="D"  onclick="" class="btn btn-info"><br><br>
+            <button type="button"   onclick="lastNum()" class="btn btn-info">&larr;</button><br><br>
             <input type="button" value="7" onclick="getVal('7')" class="btn btn-num">
             <input type="button" value="8" onclick="getVal('8')" class="btn btn-num">
             <input type="button" value="9" onclick="getVal('9')" class="btn btn-num">
@@ -146,6 +146,27 @@
                     inputVal.value+=val;
                 
             }
+
+            //Delete Last Digit From Input
+            function lastNum()
+            {
+                if(inputVal.value!="")
+                {
+                    if(inputVal.value.length>1)
+                        inputVal.value=inputVal.value.slice(0,-1);
+                    else
+                    {
+                        inputVal.value=inputVal.value.slice(0,-1);
+                        inputVal.value="0";
+                    }
+
+                }
+                else
+                {
+                    inputVal.value="0";
+                }
+            }
+
             function clearInput()
             {
                 inputVal.value="0";
